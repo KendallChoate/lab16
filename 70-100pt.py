@@ -70,7 +70,7 @@ class myApp(object):
         if event.char == "w":
             drawpad.move(player,0,-4)
             drawpad.move(rocket1,0,-4)
-        #Added ASD movement 
+        #Added ASD movement and boundary detection
         if event.char == "s":
             if (y2 < 600):
                 drawpad.move(player,0,4)
