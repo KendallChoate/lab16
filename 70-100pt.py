@@ -65,10 +65,10 @@ class myApp(object):
         drawpad.after(5,self.animate)
         
         #  This will trigger our collision detect function
-        didWeHit = self.collisionDetect()
+        #didWeHit = self.collisionDetect()
             #Stops target from moving
-        if didWeHit == False:
-            drawpad.after(1,self.animate)
+        #if didWeHit == False:
+            #drawpad.after(1,self.animate)
 
     def key(self,event):
         global player
