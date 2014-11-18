@@ -49,6 +49,7 @@ class myApp(object):
         global direction
         global rocket1
         global rocket1Fired
+        rx1,ry1,rx2,ry2 = drawpad.coords(rocket1)
         x1,y1,x2,y2 = drawpad.coords(enemy)
         px1,py1,px2,py2 = drawpad.coords(player)
 
@@ -60,6 +61,9 @@ class myApp(object):
         
         if rocket1Fired == True:
             drawpad.move(rocket1, 0, -5)
+            
+        if ry1 < 0:
+            drawpad.move(rocket1, px1-rx1, py1-ry1)
         
         drawpad.move(enemy, direction, 0)
         drawpad.after(5,self.animate)
@@ -75,7 +79,7 @@ class myApp(object):
         global rocket1Fired
         global drawpadheight
         global drawpadwidth
-        x1, y1, x2, y2 = drawpad.coords(player)
+        px1, py1, px2, py2 = drawpad.coords(player)
         if event.char == "w":
             drawpad.move(player,0,-4)
             drawpad.move(rocket1,0,-4)
@@ -105,9 +109,9 @@ class myApp(object):
         global player
         # Get the co-ordinates of our player AND our target
         # using x1,y1,x2,y2 = drawpad.coords(object)
-        tx1,ty1,tx2,ty2 = drawpad.coords(enemy)
+        x1,y1,x2,y2 = drawpad.coords(enemy)
         # Do your if statement - remember to return True if successful!                
-        if (rx1 > tx1 and rx2 < tx2) and (ry1 > ty1 and ry2 < ty2):
+        if (rx1 > x1 and rx2 < x2) and (ry1 > y1 and ry2 < y2):
             return True
         else:
             return False
