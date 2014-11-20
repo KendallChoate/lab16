@@ -2,7 +2,7 @@
 # 70pt -  Add in movement buttons for up, down, left and right using WASD Check
 # 80pt -  Make sure the player can't go out of bounds to the left, right or down. Check
 # 90pt -  When you hit space, fire a missile straight up! 
-#         Subtract from how many missiles you have left
+#         Subtract from how many missiles you have left Check
 # 100pt - Destroy the target if a missile hits it! 
 # Hints: use drawpad.delete(enemy) in the collision detect function, which you can trigger
 # from the key press event... maybe a loop to keep checking until the rocket goes out of bounds?
@@ -70,10 +70,11 @@ class myApp(object):
         drawpad.move(enemy, direction, 0)
         drawpad.after(5,self.animate)
         
-        #  This will trigger our collision detect function
+        
         #didWeHit = self.collisionDetect()
+        #Stops target from moving
         #if didWeHit == False:
-            #drawpad.delete(enemy)
+            #drawpad.after(1,self.animate)
 
     def key(self,event):
         global player
@@ -86,15 +87,15 @@ class myApp(object):
             drawpad.move(rocket1,0,-4)
         #Added ASD movement and boundary detection
         if event.char == "s":
-            if (y2 < 600):
+            if (py2 < 600):
                 drawpad.move(player,0,4)
                 drawpad.move(rocket1,0,4)
         if event.char == "a":
-            if (x1 > 0):
+            if (px1 > 0):
                 drawpad.move(player,-4,0)
                 drawpad.move(rocket1,-4,0)
         if event.char == "d":
-            if (x2 < 800):
+            if (px2 < 800):
                 drawpad.move(player,4,0)
                 drawpad.move(rocket1,4,0)
         
@@ -104,17 +105,20 @@ class myApp(object):
                 rocket1Fired = True
                 self.rockets = self.rockets - 1
                 self.rocketsTxt.configure(text=self.rockets)
+                
             
-    def collisionDetect(self, rocket1):
-        rx1,ry1,rx2,ry2 = drawpad.coords(rocket1)
-        global enemy
-	global drawpad
-        global player
+    #def collisionDetect(self, rocket1):
+        #rx1,ry1,rx2,ry2 = drawpad.coords(rocket1)
+        #global enemy
+	#global drawpad
+        #global player
         # Get the co-ordinates of our player AND our target
         # using x1,y1,x2,y2 = drawpad.coords(object)
-        x1,y1,x2,y2 = drawpad.coords(enemy)
-        # Do your if statement - remember to return True if successful!                
-        if (rx1 > x1 and rx2 < x2) and (ry1 > y1 and ry2 < y2):
-            drawpad.delete(enemy)
+        #x1,y1,x2,y2 = drawpad.coords(enemy)
+        #if (rx1 > x1 and rx2 < x2) and (ry1 > y1 and ry2 < y2):
+            #return True
+        #else:
+            #return False                  
+        
 app = myApp(root)
 root.mainloop()
